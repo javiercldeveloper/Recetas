@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 1,
+    "Nombre": "Tomate",
+    "Tipo": "Hortaliza"
+  },
+  {
+    "Id": 2,
+    "Nombre": "Lechuga",
+    "Tipo": "Verdura"
+  },
+  {
+    "Id": 3,
+    "Nombre": "Patata",
+    "Tipo": "Hortaliza"
+  },
+  {
+    "Id": 4,
+    "Nombre": "Acelga",
+    "Tipo": "Verdura"
+  },
+  {
+    "Id": 5,
+    "Nombre": "Pollo",
+    "Tipo": "Carne"
+  },
+  {
+    "Id": 6,
+    "Nombre": "Ternera",
+    "Tipo": "Carne"
+  },
+  {
+    "Id": 7,
+    "Nombre": "Caballo",
+    "Tipo": "Carne"
+  }
+]
