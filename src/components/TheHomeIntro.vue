@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainChef">
         <div class="div50-left">
             <h1>Aqui estará la llamada a la acción</h1>
             <router-link to="/acceso" tag="button">Busca tu receta</router-link>
@@ -16,20 +16,24 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" >
+    .mainChef{
+        display: flex;
+        text-align: center;
+    }
     .div50-left {
-        width: 50%;
-        float: left;
+        flex:1;
         background-color: cornflowerblue;
-        height: 500px;
-        text-align: center;
-    }
+        padding: 20px;
+     }
     .div50-right {
-        width: 50%;
-        float: right;
+        flex:1;
         background-color: dimgray;
-        height: 500px;
-        text-align: center;
+        padding: 20px;
     }
-
+    @media screen and (max-width: 800px) {
+        .mainChef{
+            flex-wrap: wrap;
+        }
+    }
 </style>

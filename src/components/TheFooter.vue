@@ -1,7 +1,7 @@
 <template>
-    <div id="footer">
+    <div class="footer">
         <div>
-            <h1>El Footer de la web</h1>
+            <h2>El Footer de la web</h2>
         </div>
     </div>
 </template>
@@ -12,15 +12,10 @@ export default {
 }
 </script>
 
-<style>
-  #footer{
-    position: fixed;
-    height: 50px;
-    color: white;
-    background-color: black;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    padding: 30px;
+<style lang="scss">
+  .footer{
+  background-color: chocolate;
+  text-align: center;
+  color: white;
     }
 </style>

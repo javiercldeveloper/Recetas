@@ -1,7 +1,5 @@
 <template>
-    <div>
         <the-recipe-finder></the-recipe-finder>
-    </div>
 </template>
 
 <script>

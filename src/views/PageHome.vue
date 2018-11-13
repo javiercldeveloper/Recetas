@@ -13,10 +13,10 @@
 <script>
 import TheHomeIntro from '../components/TheHomeIntro'
 import TheSlider from '../components/TheSlider'
-import TheChefsGrid from '../components/TheChefsGrid'
+// import TheChefsGrid from '../components/TheChefsGrid'
 import ThePreFooter from '../components/ThePreFooter'
 export default {
   name: 'PageHome',
-  components: { TheHomeIntro, TheSlider, TheChefsGrid, ThePreFooter }
+  components: { TheHomeIntro, TheSlider, ThePreFooter }
 }
 </script>

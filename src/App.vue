@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <the-header></the-header>
+    <div class="content">
     <transition name="slide-fade" mode="out-in">
     <router-view></router-view>
     </transition>
+    </div>
     <the-footer></the-footer>
   </div>
 </template>
@@ -17,7 +19,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "/styles/global.scss";
 /* TODO Better transition */
 .slide-fade-enter-active {
   transition: all .3s ease;
@@ -29,12 +32,5 @@ export default {
 /* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
-}
-/* Style to avoid the footer movement on transition*/
-#app {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden
 }
 </style>

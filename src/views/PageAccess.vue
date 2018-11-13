@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainAccess">
       <div class="div50-left">
        <the-access-form></the-access-form>
       </div>
@@ -19,5 +19,19 @@ export default {
 </script>
 
 <style scoped>
-
+    .mainAccess{
+        text-align: center;
+        display: flex;
+        justify-items: center;
+    }
+    .div50-left {
+        flex:1;
+        background-color: cornflowerblue;
+        padding: 20px;
+     }
+    .div50-right {
+        flex:1;
+        background-color: dimgray;
+        padding: 20px;
+    }
 </style>

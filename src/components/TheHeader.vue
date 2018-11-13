@@ -1,14 +1,15 @@
 <template>
     <div class="header">
-    <router-link to="/" class="logo" exact="/">KayPaCome</router-link>
-    <div class="header-right">
-      <router-link to="/" exact="/">Home</router-link>
-      <router-link to="/acceso">Acceso</router-link>
-      <router-link to="/contacto">Contacto</router-link>
-      <router-link to="/buscatuchef">Busca el chef</router-link>
-      <router-link to="/buscatureceta">Busca la receta</router-link>
-      <router-link to="/insertarnuevositems">Insertar Items</router-link>
-    </div>
+      <router-link to="/" class="logo" exact>KayPaCome</router-link>
+      <div class="header-right">
+        <router-link to="/" exact>Home</router-link>
+        <router-link to="/acceso">Acceso</router-link>
+        <router-link to="/contacto">Contacto</router-link>
+        <router-link to="/buscatuchef">Busca el chef</router-link>
+        <router-link to="/buscatureceta">Busca la receta</router-link>
+        <router-link to="/insertarnuevositems">Insertar Items</router-link>
+      </div>
+      <div class="button">XX</div>
     </div>
 </template>
 
@@ -23,20 +24,20 @@ export default {
 
 /* Style the header with a grey background and some padding */
 .header {
-  overflow: hidden;
-  background-color: #f1f1f1;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  background-color: #3aad4d;
   padding: 20px 10px;
 }
 
 /* Style the header links */
 .header a {
-  float: left;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
   font-size: 18px;
-  line-height: 25px;
   border-radius: 4px;
 }
 
@@ -54,24 +55,25 @@ export default {
 
 /* Style the active/current routerlink*/
 .header .router-link-active {
-  background-color: dodgerblue;
+  background-color:cornflowerblue ;
   color: white;
 }
 
-/* Float the link section to the right */
-.header-right {
-  float: right;
+@media screen and (max-width: 992px) {
+  .header-right {
+    display:none;
+  }
+  .button{
+    display:block;
+  }
 }
 
-/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-@media screen and (max-width: 800px) {
-  .header a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
+@media screen and (min-width: 992px) {
   .header-right {
-    float: none;
+    display:block;
+  }
+  .button{
+    display:none;
   }
 }
 </style>
