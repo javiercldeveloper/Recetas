@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-      <router-link to="/" class="logo" exact>KayPaCome</router-link>
+      <router-link to="/" class="logo" exact>KayPaCome <font-awesome-icon icon="utensils" /></router-link>
       <div class="header-right">
         <router-link to="/" exact>Home</router-link>
         <router-link to="/acceso">Acceso</router-link>
@@ -29,6 +29,7 @@ export default {
   align-items: center;
   background-color: #3aad4d;
   padding: 20px 10px;
+  min-height: 60px;
 }
 
 /* Style the header links */
@@ -60,14 +61,23 @@ export default {
 }
 
 @media screen and (max-width: 992px) {
+  .header a.logo {
+    margin: auto;
+  }
   .header-right {
     display:none;
   }
   .button{
     display:block;
+    position: fixed;
+    right: 50px;
   }
 }
-
+@media screen and (max-width: 992px) {
+  .button{
+    right: 20px;
+  }
+}
 @media screen and (min-width: 992px) {
   .header-right {
     display:block;
