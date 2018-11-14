@@ -2,6 +2,7 @@
 
 html, body {
   height: 100%;
+  box-sizing: content-box;
 }
 
 body {
@@ -12,6 +13,7 @@ body {
 input, select, textarea, button {
   font-family:inherit;
 }
+
 #app {
   height: 100vh;
   display: flex;
@@ -28,4 +30,21 @@ input, select, textarea, button {
 .footer {
   flex-shrink: 0;
   padding: 20px;
+}
+
+.title {
+  text-align: center;
+}
+
+input[type=button] {
+  background-color: chocolate;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 8px;
+    &:hover{
+      background-color: rgb(204, 155, 121);
+    }
 }

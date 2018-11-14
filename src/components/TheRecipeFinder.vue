@@ -1,8 +1,8 @@
 <template>
 <div>
-  <h1 class="h1todo">Busca la receta con tus ingredientes</h1>
-  <div class="todo">
-    <div class="main">
+  <h1 class="title" v-text="title" />
+  <div class="finderMain">
+    <div class="ingredientsSelection">
       <h2>Indica los ingredientes de tu despensa</h2>
       <div>
         <select v-model="ingredientType" v-on:change="checkRemainingIngredients">
@@ -38,23 +38,26 @@
           >
       </div>
     </div>
-    <div class="second">
+    <div class="selectionResult">
       <h2>Lista de ingredientes</h2>
-      <p>Debes indicar al menos 3 ingredientes para que busquemos una receta</p>
+
+      <p>Debes indicar al menos 4 ingredientes para que busquemos una receta</p>
+      <small class="phoneadvise">Si deseas quitar algún ingrediente de la lista, pulsa sobre él.</small>
       <div class="arrayChosen">
-        <div class="ingre"
+        <div class="ingredientChosen"
           v-for="selected in selectedIngredients"
           :key="selected.id"
-          > {{ selected.Nombre }} <small>X</small>
+          @click="removeIngredient"
+          > {{ selected.Nombre }} <span class="deleteIngredient">
+              <font-awesome-icon icon="minus-circle" />
+            </span>
         </div>
-        <div class="botonInferior">
-          <input
+      </div>
+      <div class="botonInferior">
+        <input
           v-if="selectedIngredients.length > 3"
           type="button"
-          value="Busca tu receta"
-
-          >
-        </div>
+          value="Busca tu receta">
       </div>
     </div>
   </div>
@@ -66,6 +69,7 @@ export default {
   name: 'TheRecipeFinder',
   data () {
     return {
+      title: 'Busca la receta con tus ingredientes',
       ingredients: [],
       ingredientType: '',
       selectedIngredient: '',
@@ -120,6 +124,12 @@ export default {
       this.ingredients[index].Seleccionado = true
       this.selectedIngredient = ''
       this.checkRemainingIngredients()
+    },
+    removeIngredient (event) {
+      let index = this.ingredients.findIndex(x => x.Nombre === event.srcElement.innerText)
+      this.ingredients[index].Seleccionado = false
+      index = this.selectedIngredients.findIndex(x => x.Nombre === event.srcElement.innerText)
+      this.selectedIngredients.splice(index, 1)
     }
   }
 }
@@ -129,20 +139,7 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/global.scss";
 
-.main {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 10px;
-  text-align: center;
-  justify-items: flex-start;
-}
-
-.input{
-  background-color:beige;
-}
-
-.todo{
+.finderMain{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -150,39 +147,80 @@ export default {
   align-items: flex-start;
 }
 
-.h1todo{
+.ingredientsSelection {
+  border-radius: 10px;
+  background-color:cadetblue;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px;
   text-align: center;
+  justify-items: flex-start;
+
 }
 
-.second{
+.selectionResult{
+  border-radius: 10px;
+  margin-left: 40px;
   padding: 20px;
   text-align: center;
   min-height: 400px;
   background-color: antiquewhite;
-  flex: 1.5;
+  flex: 1.3;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 
 }
 
+.phoneadvise{
+  display: none;
+}
+
+ @media screen and (max-width: 620px) {
+        .selectionResult{
+            margin-left: 0px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            flex: 1;
+        }
+        .phoneadvise{
+            display: block;
+        }
+    }
+
+.input{
+  background-color:beige;
+}
+
 .arrayChosen{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  & .ingre{
-    flex: 0 0 30%;
+  & .ingredientChosen{
     border-radius: 5px;
     border: 1px solid black;
     background-color: #3aad4d;
-    margin: 5px;
     padding: 3px;
+    cursor: pointer;
   }
 }
 
+.ingredientChosen:hover{
+  background: red;
+}
+.ingredientChosen:hover .deleteIngredient{
+  display: inline;
+}
+
+.deleteIngredient{
+ display: none;
+}
+
 .botonInferior{
+  margin-top: 30px;
   padding: 20px;
   text-align: center;
   flex: 1;
