@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './plugins/fontawesome'
 import VueRouter from 'vue-router'
 import { routes } from './router/routes'
 import App from './App.vue'
