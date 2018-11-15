@@ -2,7 +2,7 @@
     <div class="mainChef">
         <div class="div50-left">
             <h1>Aqui estará la llamada a la acción</h1>
-            <router-link to="/acceso" tag="button">Busca tu receta</router-link>
+            <router-link to="/buscatureceta" tag="button">Busca tu receta</router-link>
         </div>
         <div class="div50-right">
             <h2>Aquí estará la mascota de la web</h2>
@@ -20,6 +20,7 @@ export default {
     .mainChef{
         display: flex;
         text-align: center;
+        min-height: 400px;
     }
     .div50-left {
         flex:1;

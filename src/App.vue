@@ -33,4 +33,7 @@ export default {
   transform: translateX(10px);
   opacity: 0;
 }
+.content{
+  margin-top: 100px;
+}
 </style>

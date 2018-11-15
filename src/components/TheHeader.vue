@@ -2,12 +2,11 @@
     <div class="header">
       <router-link to="/" class="logo" exact>KayPaCome <font-awesome-icon icon="utensils" /></router-link>
       <div class="header-right">
-        <router-link to="/" exact>Home</router-link>
         <router-link to="/acceso">Acceso</router-link>
         <router-link to="/contacto">Contacto</router-link>
-        <router-link to="/buscatuchef">Busca el chef</router-link>
         <router-link to="/buscatureceta">Busca la receta</router-link>
-        <router-link to="/insertarnuevositems">Insertar Items</router-link>
+        <!-- <router-link to="/buscatuchef">Busca el chef</router-link>
+        <router-link to="/insertarnuevositems">Insertar Items</router-link> -->
       </div>
       <div class="button">XX</div>
     </div>
@@ -18,18 +17,19 @@ export default {
   name: 'TheHeader'
 }
 </script>
-
-<style>
+<style lang="scss">
 /* Temporary stylesheet for the header */
 
 /* Style the header with a grey background and some padding */
 .header {
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content:space-around;
   align-items: center;
   background-color: #3aad4d;
-  padding: 20px 10px;
-  min-height: 60px;
+  padding: 15px 10px;
+  min-height: 40px;
 }
 
 /* Style the header links */
@@ -40,12 +40,17 @@ export default {
   text-decoration: none;
   font-size: 18px;
   border-radius: 4px;
+
 }
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
   font-size: 25px;
   font-weight: bold;
+  &.router-link-active{
+    background-color: #3aad4d;
+    color: white;
+  }
 }
 
 /* Change the background color on mouse-over */

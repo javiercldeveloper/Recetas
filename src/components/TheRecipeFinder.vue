@@ -1,18 +1,19 @@
 <template>
 <div>
   <h1 class="title" v-text="title" />
-  <div class="finderMain">
+  <div
+    v-if="state === 'chosing'"
+   class="finderMain">
     <div class="ingredientsSelection">
       <h2>Indica los ingredientes de tu despensa</h2>
       <div>
         <select v-model="ingredientType" v-on:change="checkRemainingIngredients">
-            <option disabled value="">Selecciona un tipo de alimento</option>
+            <option disabled value="">Selecciona un tipo de ingrediente</option>
             <option>Carne</option>
             <option>Hortaliza</option>
             <option>Verdura</option>
         </select>
       </div>
-      <br>
       <div>
         <select v-model="selectedIngredient" :disabled="!remainingIngredients">
             <option
@@ -27,8 +28,6 @@
             </option>
         </select>
       </div>
-      <br>
-      <br>
       <div>
         <input
           type="button"
@@ -40,26 +39,44 @@
     </div>
     <div class="selectionResult">
       <h2>Lista de ingredientes</h2>
-
       <p>Debes indicar al menos 4 ingredientes para que busquemos una receta</p>
-      <small class="phoneadvise">Si deseas quitar algún ingrediente de la lista, pulsa sobre él.</small>
       <div class="arrayChosen">
         <div class="ingredientChosen"
           v-for="selected in selectedIngredients"
           :key="selected.id"
           @click="removeIngredient"
-          > {{ selected.Nombre }} <span class="deleteIngredient">
-              <font-awesome-icon icon="minus-circle" />
-            </span>
+          >
+          <div>{{ selected.Nombre }}</div>
+          <div class="removebutton">
+              <font-awesome-icon
+              @click="removeIngredient"
+              icon="minus-circle" />
+            </div>
         </div>
       </div>
       <div class="botonInferior">
         <input
-          v-if="selectedIngredients.length > 3"
+          v-if="selectedIngredients.length > 0"
           type="button"
+          @click="fetchRecipes"
           value="Busca tu receta">
       </div>
     </div>
+  </div>
+  <div
+    v-else-if="state === 'loading'"
+    class="chefLoading">
+    <img src="../assets/img/chef.gif" alt="Chef Buscando">
+  </div>
+  <div
+    v-else
+    class="recipeList">
+    <ul>
+      <li>Recetas Rica Rica</li>
+      <li>Recetas Rica Rica</li>
+      <li>Recetas Rica Rica</li>
+      <li>Recetas Rica Rica</li>
+    </ul>
   </div>
 </div>
 </template>
@@ -75,7 +92,9 @@ export default {
       selectedIngredient: '',
       remainingIngredients: false,
       selectedIngredients: [],
-      defaultSelectIngredientText: 'Selecciona un ingrediente'
+      defaultSelectIngredientText: 'Selecciona un ingrediente',
+      state: 'chosing',
+      recipesResult: []
     }
   },
   created () {
@@ -125,11 +144,22 @@ export default {
       this.selectedIngredient = ''
       this.checkRemainingIngredients()
     },
+
     removeIngredient (event) {
-      let index = this.ingredients.findIndex(x => x.Nombre === event.srcElement.innerText)
+    // Method to remove an ingredient from the chosen list
+      let index = this.ingredients.findIndex(x => x.Nombre === event.path[3].textContent)
       this.ingredients[index].Seleccionado = false
-      index = this.selectedIngredients.findIndex(x => x.Nombre === event.srcElement.innerText)
+      index = this.selectedIngredients.findIndex(x => x.Nombre === event.path[3].textContent)
       this.selectedIngredients.splice(index, 1)
+    },
+
+    fetchRecipes () {
+      this.state = 'loading'
+      this.title = 'Estamos buscando tus recetas'
+      setTimeout(() => {
+        this.state = 'result'
+        this.title = 'Este es el listado de recetas'
+      }, 5000)
     }
   }
 }
@@ -154,9 +184,12 @@ export default {
   flex: 1;
   flex-direction: column;
   padding: 10px;
+  align-self: stretch;
   text-align: center;
   justify-items: flex-start;
-
+    & >* {
+      margin-bottom: 40px;
+    }
 }
 
 .selectionResult{
@@ -173,19 +206,12 @@ export default {
 
 }
 
-.phoneadvise{
-  display: none;
-}
-
  @media screen and (max-width: 620px) {
         .selectionResult{
             margin-left: 0px;
             margin-top: 30px;
             margin-bottom: 50px;
             flex: 1;
-        }
-        .phoneadvise{
-            display: block;
         }
     }
 
@@ -204,19 +230,24 @@ export default {
     border: 1px solid black;
     background-color: #3aad4d;
     padding: 3px;
+    padding-left: 10px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    & >*{
+      flex:1;
+      text-align: center;
+    }
+    & > .removebutton{
+      flex: 0.3;
+      cursor: pointer;
+      padding-left: 3px;
+      border-left-color: black;
+      border-left-width: 2px;
+      border-left-style: solid;
+      color: white;
+    }
   }
-}
-
-.ingredientChosen:hover{
-  background: red;
-}
-.ingredientChosen:hover .deleteIngredient{
-  display: inline;
-}
-
-.deleteIngredient{
- display: none;
 }
 
 .botonInferior{
@@ -224,6 +255,12 @@ export default {
   padding: 20px;
   text-align: center;
   flex: 1;
+}
+
+.chefLoading, .recipeList {
+  text-align: center;
+  width: 100%;
+  height: auto;
 }
 
 </style>
