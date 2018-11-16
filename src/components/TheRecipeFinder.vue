@@ -43,13 +43,12 @@
       <div class="arrayChosen">
         <div class="ingredientChosen"
           v-for="selected in selectedIngredients"
-          :key="selected.id"
-          @click="removeIngredient"
+          :key="selected.Id"
           >
           <div>{{ selected.Nombre }}</div>
           <div class="removebutton">
               <font-awesome-icon
-              @click="removeIngredient"
+              @click="removeIngredient(selected.Id)"
               icon="minus-circle" />
             </div>
         </div>
@@ -145,11 +144,11 @@ export default {
       this.checkRemainingIngredients()
     },
 
-    removeIngredient (event) {
+    removeIngredient (id) {
     // Method to remove an ingredient from the chosen list
-      let index = this.ingredients.findIndex(x => x.Nombre === event.path[3].textContent)
+      let index = this.ingredients.findIndex(x => x.Id === id)
       this.ingredients[index].Seleccionado = false
-      index = this.selectedIngredients.findIndex(x => x.Nombre === event.path[3].textContent)
+      index = this.selectedIngredients.findIndex(x => x.Id === id)
       this.selectedIngredients.splice(index, 1)
     },
 
