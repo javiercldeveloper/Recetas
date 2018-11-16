@@ -1,20 +1,44 @@
 <template>
     <div class="header">
       <router-link to="/" class="logo" exact>KayPaCome <font-awesome-icon icon="utensils" /></router-link>
-      <div class="header-right">
+      <div
+        class="header-right"
+        :class="{ abierto: clickado }">
         <router-link to="/acceso">Acceso</router-link>
         <router-link to="/contacto">Contacto</router-link>
         <router-link to="/buscatureceta">Busca la receta</router-link>
         <!-- <router-link to="/buscatuchef">Busca el chef</router-link>
         <router-link to="/insertarnuevositems">Insertar Items</router-link> -->
       </div>
-      <div class="button">XX</div>
+      <font-awesome-icon
+        @click="desplegarMenu"
+        :icon="icon"
+        class="button"
+      />
     </div>
 </template>
 
 <script>
 export default {
-  name: 'TheHeader'
+  name: 'TheHeader',
+  data () {
+    return {
+      clickado: false,
+      icon: 'bars'
+    }
+  },
+  watch: {
+    // Observer to close the mobile menu on page change
+    $route (to, from) {
+      this.clickado = false
+    }
+  },
+  methods: {
+    desplegarMenu () {
+      this.clickado ? this.clickado = false : this.clickado = true
+      this.icon === 'bars' ? this.icon = 'times' : this.icon = 'bars'
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -71,6 +95,21 @@ export default {
   }
   .header-right {
     display:none;
+     &.abierto {
+        width: 200px;
+        position: fixed;
+        top: 86px;
+        right: 0;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        background-color: #3aad4d;
+        border-top: 1px solid black;
+        >*{
+          border-bottom: 1px solid black;
+          border-radius: 0px;
+        }
+     }
   }
   .button{
     display:block;
@@ -78,11 +117,7 @@ export default {
     right: 50px;
   }
 }
-@media screen and (max-width: 992px) {
-  .button{
-    right: 20px;
-  }
-}
+
 @media screen and (min-width: 992px) {
   .header-right {
     display:block;
