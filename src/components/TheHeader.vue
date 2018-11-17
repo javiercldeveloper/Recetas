@@ -31,6 +31,7 @@ export default {
     // Observer to close the mobile menu on page change
     $route (to, from) {
       this.clickado = false
+      this.icon = 'bars'
     }
   },
   methods: {

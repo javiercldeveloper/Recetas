@@ -154,6 +154,7 @@ export default {
 
     fetchRecipes () {
       this.state = 'loading'
+      document.getElementsByClassName('title')[0].scrollIntoView()
       this.title = 'Estamos buscando tus recetas'
       setTimeout(() => {
         this.state = 'result'
