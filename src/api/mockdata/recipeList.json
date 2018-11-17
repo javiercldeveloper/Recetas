@@ -1,0 +1,30 @@
+[
+  {
+    "Id": 1,
+    "Nombre": "Pan con tomate y huevos",
+    "Descripcion": "Un rico plato y muy facil de hacer",
+    "Thumbnail": "https://designshack.net/wp-content/uploads/css-text-shadow-effects-150x100.png",
+    "Ingredientes": ["Tomate", "Huevos", "Pan"]
+  },
+  {
+    "Id": 2,
+    "Nombre": "Pan con tomate y chorizo",
+    "Descripcion": "Un rico plato y muy facil de hacer",
+    "Thumbnail": "https://designshack.net/wp-content/uploads/css-text-shadow-effects-150x100.png",
+    "Ingredientes": ["Tomate", "Pan", "Chorizo"]
+  },
+  {
+    "Id": 3,
+    "Nombre": "Pan con tomate y Jamón",
+    "Descripcion": "Un rico plato y muy facil de hacer",
+    "Thumbnail": "https://designshack.net/wp-content/uploads/css-text-shadow-effects-150x100.png",
+    "Ingredientes": ["Tomate", "Jamón", "Pan"]
+  },
+  {
+    "Id": 4,
+    "Nombre": "Chorizo con tomate y huevos",
+    "Descripcion": "Un rico plato y muy facil de hacer",
+    "Thumbnail": "https://designshack.net/wp-content/uploads/css-text-shadow-effects-150x100.png",
+    "Ingredientes": ["Tomate", "Huevos", "Chorizo"]
+  }
+]

@@ -17,6 +17,7 @@ Vue.mixin({
 
 // Mock Data
 const ingredients = require('./mockdata/ingredients')
+const recipes = require('./mockdata/recipeList')
 
 export default {
   name: 'services',
@@ -36,6 +37,7 @@ export default {
     //     console.log(error))
     },
     getMatchingRecipes (ingredients) {
+      return recipes
     // axios.post('/', {
     //   ingredients
     // })
