@@ -35,6 +35,14 @@
           @click="addIngredientToQuery"
           :disabled="activeButton"
           >
+          <div
+            class="basket"
+            :class="{ full: this.selectedIngredients.length > 0 }">
+            <font-awesome-icon
+              @click="showSelectedMobile()"
+              icon="shopping-basket" />
+            {{ this.selectedIngredients.length }}
+          </div>
       </div>
     </div>
     <div class="selectionResult">
@@ -70,19 +78,18 @@
   <div
     v-else
     class="recipeList">
-    <ul>
-      <li>Recetas Rica Rica</li>
-      <li>Recetas Rica Rica</li>
-      <li>Recetas Rica Rica</li>
-      <li>Recetas Rica Rica</li>
-    </ul>
+    <recipe-list
+      :recipientslist="this.recipesResult"
+    ></recipe-list>
   </div>
 </div>
 </template>
 
 <script>
+import RecipeList from './RecipeList'
 export default {
   name: 'TheRecipeFinder',
+  components: { RecipeList },
   data () {
     return {
       title: 'Busca la receta con tus ingredientes',
@@ -118,6 +125,10 @@ export default {
     }
   },
   methods: {
+    showSelectedMobile () {
+      document.getElementsByClassName('selectionResult')[0].scrollIntoView()
+    },
+
     fetchIngredients () {
     // Method to get the whole list of ingredientes
       this.ingredients = this.$services.methods.getIngredients()
@@ -156,10 +167,12 @@ export default {
       this.state = 'loading'
       document.getElementsByClassName('title')[0].scrollIntoView()
       this.title = 'Estamos buscando tus recetas'
+      this.recipesResult = this.$services.methods.getMatchingRecipes()
+      console.log(this.recipesResult)
       setTimeout(() => {
         this.state = 'result'
         this.title = 'Este es el listado de recetas'
-      }, 5000)
+      }, 4000)
     }
   }
 }
@@ -168,6 +181,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/global.scss";
+
+.basket {
+  display: none;
+  margin-top: 30px;
+  opacity: 0.3;
+  &.full{
+    opacity: 1;
+  }
+}
 
 .finderMain{
   display: flex;
@@ -212,6 +234,9 @@ export default {
             margin-top: 30px;
             margin-bottom: 50px;
             flex: 1;
+        }
+        .basket {
+          display: block;
         }
     }
 
@@ -263,4 +288,16 @@ export default {
   height: auto;
 }
 
+.chefLoading{
+  max-width: 700px;
+  margin:auto;
+}
+
+.recipeList >*{
+      margin:auto;
+      margin-bottom: 20px;
+      @media screen and (max-width: 620px) {
+        text-align: center;
+      }
+    }
 </style>
