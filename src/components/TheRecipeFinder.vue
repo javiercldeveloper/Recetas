@@ -10,8 +10,11 @@
         <select v-model="ingredientType" v-on:change="checkRemainingIngredients">
             <option disabled value="">Selecciona un tipo de ingrediente</option>
             <option>Carne</option>
-            <option>Hortaliza</option>
-            <option>Verdura</option>
+            <option>Marisco</option>
+            <option>Cereales, harinas y masas</option>
+            <option>Frutas</option>
+            <option>Legumbres y verduras</option>
+            <option>Lácteos</option>
         </select>
       </div>
       <div>
@@ -131,7 +134,7 @@ export default {
 
     fetchIngredients () {
     // Method to get the whole list of ingredientes
-      this.ingredients = this.$services.methods.getIngredients()
+      this.$services.methods.getIngredients().then((result) => { this.ingredients = result })
     },
 
     checkRemainingIngredients () {

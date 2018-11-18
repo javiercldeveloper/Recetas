@@ -4,6 +4,8 @@
 // Mixin to access the methods globally
 
 import Vue from 'vue'
+import axios from 'axios'
+
 Vue.mixin({
   beforeCreate () {
     const options = this.$options
@@ -16,25 +18,23 @@ Vue.mixin({
 })
 
 // Mock Data
-const ingredients = require('./mockdata/ingredients')
+// const ingredients = require('./mockdata/ingredients')
 const recipes = require('./mockdata/recipeList')
 
 export default {
   name: 'services',
   methods: {
     getIngredients () {
-      let ingredientsExtra = ingredients.map((ingrediente) => {
-        ingrediente.Seleccionado = false
-        return ingrediente
-      })
-
-      return ingredientsExtra
-    // return axios.get('/')
-    //   .then(response => {
-    //     return response.data
-    //   })
-    //   .catch(error =>
-    //     console.log(error))
+      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/ingredientes')
+        .then(response => {
+          let ingredientsExtra = response.data.map((ingrediente) => {
+            ingrediente.Seleccionado = false
+            return ingrediente
+          })
+          return ingredientsExtra
+        })
+        .catch(error =>
+          console.log(error))
     },
     getMatchingRecipes (ingredients) {
       return recipes
