@@ -171,7 +171,6 @@ export default {
       document.getElementsByClassName('title')[0].scrollIntoView()
       this.title = 'Estamos buscando tus recetas'
       this.recipesResult = this.$services.methods.getMatchingRecipes()
-      console.log(this.recipesResult)
       setTimeout(() => {
         this.state = 'result'
         this.title = 'Este es el listado de recetas'

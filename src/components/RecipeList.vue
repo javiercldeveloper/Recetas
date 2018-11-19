@@ -11,9 +11,6 @@
 
 import RecipeListItem from './RecipeListItem'
 export default {
-  created () {
-    console.log(this.recipientslist)
-  },
   name: 'RecipeList',
   components: { RecipeListItem },
   props: {

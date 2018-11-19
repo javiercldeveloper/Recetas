@@ -13,9 +13,6 @@
 
 <script>
 export default {
-  created () {
-    console.log(this.recipe)
-  },
   name: 'RecipeListItem',
   props: {
     recipe: {
