@@ -1,6 +1,10 @@
 <template>
   <div class="main">
-    <div class="image"><a href="#"><img :src="this.recipe.thumbnail"></a></div>
+    <div class="image">
+      <a href="#">
+        <img :src="this.recipe.thumbnail === '' ? `/images/nothumbnail.jpg` : this.recipe.thumbnail">
+      </a>
+    </div>
     <div class="rest">
       <a href="#">
       <strong>{{ this.recipe.Nombre }}</strong>
