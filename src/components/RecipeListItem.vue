@@ -1,16 +1,16 @@
 <template>
   <div class="main">
     <div class="image">
-      <a href="#">
+      <a :href="'/receta/'+ this.recipe.id.$numberInt">
         <img :src="this.recipe.thumbnail === '' ? `/images/nothumbnail.jpg` : this.recipe.thumbnail">
       </a>
     </div>
     <div class="rest">
-      <a href="#">
-      <strong>{{ this.recipe.Nombre }}</strong>
+      <a :href="'/receta/'+ this.recipe.id.$numberInt">
+      <strong>{{ this.recipe.nombre }}</strong>
       </a>
       <hr>
-    <p>{{ this.recipe.Descripción }}</p>
+    <p>{{ this.recipe.descripcion }}</p>
     <p>Ingredientes : {{ this.recipe.ingredientes.join(', ') }}</p></div>
   </div>
 </template>

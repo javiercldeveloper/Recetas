@@ -43,6 +43,15 @@ export default {
         .catch(error =>
           console.log(error))
     },
+    getRecipe (id) {
+      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/Receta?id=' + id)
+        .then(function (response) {
+          return response.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
     postNewIngredient (newIngredient) {
     // axios.post('/', {
     //   newIngredient

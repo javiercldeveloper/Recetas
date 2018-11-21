@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Aquí se detallan los datos de la receta</h2>
     <TheRecipeDescription/>
   </div>
 </template>
