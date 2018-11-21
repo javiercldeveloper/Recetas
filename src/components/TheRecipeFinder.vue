@@ -178,7 +178,6 @@ export default {
       this.state = 'loading'
       this.title = 'Estamos buscando tus recetas'
       this.$services.methods.getMatchingRecipes(this.selectedIngredients).then((result) => {
-        console.log(result.length)
         if (result.length > 0) {
           this.recipesResult = result
           this.title = 'Este es el listado de recetas'
