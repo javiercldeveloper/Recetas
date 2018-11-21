@@ -79,11 +79,17 @@
     <img src="../assets/img/chef.gif" alt="Chef Buscando">
   </div>
   <div
-    v-else
+    v-else-if="state === 'result'"
     class="recipeList">
     <recipe-list
       :recipientslist="this.recipesResult"
     ></recipe-list>
+  </div>
+    <div
+    v-else
+    class="chefLoading">
+      <p>Llama aquí y pidete algo</p>
+      <img src="https://i.kinja-img.com/gawker-media/image/upload/s--ZRhU-h26--/c_scale,f_auto,fl_progressive,q_80,w_800/objl6gz9fd728tp5plg8.jpg" alt="Just Eat">
   </div>
 </div>
 </template>
@@ -167,14 +173,21 @@ export default {
     },
 
     fetchRecipes () {
-      this.state = 'loading'
+    // Method to fetch the list of required recipes
       document.getElementsByClassName('title')[0].scrollIntoView()
+      this.state = 'loading'
       this.title = 'Estamos buscando tus recetas'
-      this.recipesResult = this.$services.methods.getMatchingRecipes()
-      setTimeout(() => {
-        this.state = 'result'
-        this.title = 'Este es el listado de recetas'
-      }, 4000)
+      this.$services.methods.getMatchingRecipes(this.selectedIngredients).then((result) => {
+        console.log(result.length)
+        if (result.length > 0) {
+          this.recipesResult = result
+          this.title = 'Este es el listado de recetas'
+          this.state = 'result'
+        } else {
+          this.title = 'No se han encontrado recetas con dichos ingredientes'
+          this.state = 'noResult'
+        }
+      })
     }
   }
 }

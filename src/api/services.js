@@ -1,10 +1,11 @@
-// TODO Change mock data to real backend
-// import axios from 'axios'
-
-// Mixin to access the methods globally
+// Mock Data
+// const ingredients = require('./mockdata/ingredients')
+// const recipes = require('./mockdata/recipeList')
 
 import Vue from 'vue'
 import axios from 'axios'
+
+// Mixin to access the methods globally
 
 Vue.mixin({
   beforeCreate () {
@@ -16,10 +17,6 @@ Vue.mixin({
     }
   }
 })
-
-// Mock Data
-// const ingredients = require('./mockdata/ingredients')
-const recipes = require('./mockdata/recipeList')
 
 export default {
   name: 'services',
@@ -37,15 +34,14 @@ export default {
           console.log(error))
     },
     getMatchingRecipes (ingredients) {
-      return recipes
-    // axios.post('/', {
-    //   ingredients
-    // })
-    //   .then(response => {
-    //     return response.data
-    //   })
-    //   .catch(error =>
-    //     console.log(error))
+      return axios.post('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/Recetas', {
+        ingredients
+      })
+        .then(response => {
+          return response.data
+        })
+        .catch(error =>
+          console.log(error))
     },
     postNewIngredient (newIngredient) {
     // axios.post('/', {

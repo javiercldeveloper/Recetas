@@ -1,18 +1,21 @@
 <template>
   <div class="main">
-    <div class="image"><a href="#"><img :src="this.recipe.Thumbnail"></a></div>
+    <div class="image"><a href="#"><img :src="this.recipe.thumbnail"></a></div>
     <div class="rest">
       <a href="#">
       <strong>{{ this.recipe.Nombre }}</strong>
       </a>
       <hr>
-    <p>{{ this.recipe.Descripcion }}</p>
-    <p>Ingredientes : {{ this.recipe.Ingredientes.join(', ') }}</p></div>
+    <p>{{ this.recipe.Descripción }}</p>
+    <p>Ingredientes : {{ this.recipe.ingredientes.join(', ') }}</p></div>
   </div>
 </template>
 
 <script>
 export default {
+  created () {
+    console.log(this.recipe)
+  },
   name: 'RecipeListItem',
   props: {
     recipe: {
