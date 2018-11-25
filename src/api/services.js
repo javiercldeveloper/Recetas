@@ -61,6 +61,15 @@ export default {
           console.log(error)
         })
     },
+    getRandomRecipes () {
+      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/sliderRandomRecipes')
+        .then(function (response) {
+          return response.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
     postNewIngredient (newIngredient) {
     // axios.post('/', {
     //   newIngredient
