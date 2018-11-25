@@ -89,7 +89,9 @@
     v-else
     class="chefLoading">
       <p>Llama aquí y pidete algo</p>
-      <img src="https://i.kinja-img.com/gawker-media/image/upload/s--ZRhU-h26--/c_scale,f_auto,fl_progressive,q_80,w_800/objl6gz9fd728tp5plg8.jpg" alt="Just Eat">
+      <h2><a target="_blank" :href="associate.url" >{{ associate.nombre}}</a></h2>
+      <a target="_blank" :href="associate.url" ><img :src="associate.image" :alt="associate.nombre"></a>
+      <p>{{ associate.descripcion }}</p>
   </div>
 </div>
 </template>
@@ -109,7 +111,8 @@ export default {
       selectedIngredients: [],
       defaultSelectIngredientText: 'Selecciona un ingrediente',
       state: 'chosing',
-      recipesResult: []
+      recipesResult: [],
+      associate: {}
     }
   },
   created () {
@@ -183,10 +186,14 @@ export default {
           this.title = 'Este es el listado de recetas'
           this.state = 'result'
         } else {
-          this.title = 'No se han encontrado recetas con dichos ingredientes'
-          this.state = 'noResult'
+          this.showRandomAssociate()
         }
       })
+    },
+    showRandomAssociate () {
+      this.$services.methods.getRandomAssociate().then((result) => { this.associate = result })
+      this.title = 'No se han encontrado recetas con dichos ingredientes'
+      this.state = 'noResult'
     }
   }
 }

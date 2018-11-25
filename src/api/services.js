@@ -52,6 +52,15 @@ export default {
           console.log(error)
         })
     },
+    getRandomAssociate () {
+      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/randomassociate')
+        .then(function (response) {
+          return response.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
     postNewIngredient (newIngredient) {
     // axios.post('/', {
     //   newIngredient
