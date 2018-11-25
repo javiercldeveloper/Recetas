@@ -1,5 +1,7 @@
 <template>
   <div>
+    <loader v-if="loading"/>
+    <div v-else>
     <h1 class="title">Receta: {{ this.recipe.nombre }}</h1>
     <div class="main">
       <div>
@@ -39,16 +41,24 @@
       </div>
     </div>
     </div>
+    </div>
 </template>
 
 <script>
+import Loader from '../components/Loader'
 export default {
   name: 'TheRecipeDescription',
+  components: { Loader },
   created () {
-    this.$services.methods.getRecipe(this.id).then((result) => { this.recipe = result })
+    this.loading = true
+    this.$services.methods.getRecipe(this.id).then((result) => {
+      this.loading = false
+      this.recipe = result
+    })
   },
   data () {
     return {
+      loading: false,
       recipe: {},
       id: this.$route.params.id
     }
