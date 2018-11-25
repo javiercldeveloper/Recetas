@@ -24,7 +24,7 @@ export default {
     }
   },
   created () {
-    // this.aa()
+    this.aa()
   },
   props: {
     recipes: {

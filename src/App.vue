@@ -34,6 +34,6 @@ export default {
   opacity: 0;
 }
 .content{
-  margin-top: 100px;
+  margin-top: 130px;
 }
 </style>
