@@ -45,7 +45,6 @@ export default {
 <style lang="scss">
 /* Temporary stylesheet for the header */
 
-/* Style the header with a grey background and some padding */
 .header {
   position: fixed;
   width: 100%;
@@ -55,6 +54,7 @@ export default {
   background-color: #3aad4d;
   padding: 15px 10px;
   min-height: 40px;
+  z-index: 10000;
 }
 
 /* Style the header links */
@@ -68,7 +68,6 @@ export default {
 
 }
 
-/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
   font-size: 25px;
   font-weight: bold;
@@ -78,7 +77,6 @@ export default {
   }
 }
 
-/* Change the background color on mouse-over */
 .header a:hover {
   background-color: #ddd;
   color: black;
