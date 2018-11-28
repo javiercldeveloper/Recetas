@@ -1,37 +1,27 @@
 <template>
     <div class="mainAccess">
-      <div class="div50-left">
        <the-access-form></the-access-form>
-      </div>
-      <div class="div50-right">
-        <the-register-form></the-register-form>
-      </div>
     </div>
 </template>
 
 <script>
 import TheAccessForm from '../components/TheAccessForm'
-import TheRegisterForm from '../components/TheRegisterForm'
 export default {
   name: 'PageAccess',
-  components: { TheAccessForm, TheRegisterForm }
+  components: { TheAccessForm }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .mainAccess{
         text-align: center;
-        display: flex;
-        justify-items: center;
-    }
-    .div50-left {
-        flex:1;
-        background-color: cornflowerblue;
-        padding: 20px;
-     }
-    .div50-right {
-        flex:1;
-        background-color: dimgray;
-        padding: 20px;
+        margin: auto;
+        width: 40%;
+        background-color: #3aad4d;
+        padding: 30px;
+        border-radius: 20px;
+        @media screen and (max-width: 620px) {
+        width: 70%;
+      }
     }
 </style>

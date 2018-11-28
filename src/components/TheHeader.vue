@@ -7,8 +7,7 @@
         <router-link to="/acceso">Acceso</router-link>
         <router-link to="/contacto">Contacto</router-link>
         <router-link to="/buscatureceta">Busca la receta</router-link>
-        <!-- <router-link to="/buscatuchef">Busca el chef</router-link>
-        <router-link to="/insertarnuevositems">Insertar Items</router-link> -->
+        <router-link v-if="user === '5bfba961698a673ef8c4e16d'" to="/insertarnuevositems">Insertar Items</router-link>
       </div>
       <font-awesome-icon
         @click="desplegarMenu"
@@ -19,6 +18,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'TheHeader',
   data () {
@@ -27,11 +27,19 @@ export default {
       icon: 'bars'
     }
   },
+  computed: {
+    user () {
+      return JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id
+    }
+  },
   watch: {
     // Observer to close the mobile menu on page change
-    $route (to, from) {
+    $route (to) {
       this.clickado = false
       this.icon = 'bars'
+    },
+    user (newUser) {
+      this.user = newUser
     }
   },
   methods: {
