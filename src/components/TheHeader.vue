@@ -29,7 +29,10 @@ export default {
   },
   computed: {
     user () {
-      return JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id
+      if (JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info'))) {
+        return JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id
+      }
+      return null
     }
   },
   watch: {
