@@ -22,8 +22,10 @@ import {
 } from 'mongodb-stitch-browser-sdk'
 
 const client = Stitch.initializeDefaultAppClient('segundo-bjjsd')
-const currentUser = JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id
-
+var currentUser
+if (localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')) {
+  currentUser = JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id
+} else currentUser = null
 export default {
   name: 'TheAccessForm',
   data () {
