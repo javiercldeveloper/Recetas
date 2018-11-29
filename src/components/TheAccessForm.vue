@@ -16,12 +16,9 @@
 </template>
 
 <script>
-import {
-  Stitch,
-  UserPasswordCredential
-} from 'mongodb-stitch-browser-sdk'
+import { store } from '../store.js'
+import { UserPasswordCredential } from 'mongodb-stitch-browser-sdk'
 
-const client = Stitch.initializeDefaultAppClient('segundo-bjjsd')
 var currentUser
 if (localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')) {
   currentUser = JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id
@@ -47,14 +44,14 @@ export default {
   methods: {
     log () {
       const credential = new UserPasswordCredential(this.email, this.password)
-      client.auth.loginWithCredential(credential)
+      store.client.auth.loginWithCredential(credential)
         .then(user => { location.reload() })
         .catch((error) => {
           this.message = error.message
         })
     },
     fuera () {
-      client.auth.logout()
+      store.client.auth.logout()
         .then(response => {
           this.logged = false
           location.reload()

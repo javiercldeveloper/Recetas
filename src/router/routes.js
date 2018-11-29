@@ -17,7 +17,15 @@ export const routes = [
   { path: '/buscatuchef', component: PageChefsFinder },
   { path: '/receta/:id', component: PageRecipe },
   { path: '/buscatureceta', component: PageRecipesFinder },
-  { path: '/insertarnuevositems', component: PageNewItems },
+  {
+    path: '/insertarnuevositems',
+    component: PageNewItems,
+    // Redirect to HomePage if not logged
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info') && JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id === '5bfba961698a673ef8c4e16d') {
+        next()
+      } else next('/')
+    } },
   // The last route will redirect to 404 Page
   { path: '*', component: Page404 }
 ]
