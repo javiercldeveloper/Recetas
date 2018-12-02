@@ -39,7 +39,7 @@ export default {
     }
   },
   created () {
-    currentUser === '5bfba961698a673ef8c4e16d' ? this.logged = true : this.logged = false
+    currentUser === '5c045ff0698a673501394d61' ? this.logged = true : this.logged = false
   },
   methods: {
     logIn () {

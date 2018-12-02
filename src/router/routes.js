@@ -23,7 +23,7 @@ export const routes = [
     component: PageNewIngredients,
     // Redirect to HomePage if not logged
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info') && JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id === '5bfba961698a673ef8c4e16d') {
+      if (localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info') && JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id === '5c045ff0698a673501394d61') {
         next()
       } else next('/')
     } },
@@ -32,7 +32,7 @@ export const routes = [
     component: PageNewRecipes,
     // Redirect to HomePage if not logged
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info') && JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id === '5bfba961698a673ef8c4e16d') {
+      if (localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info') && JSON.parse(localStorage.getItem('__stitch.client.segundo-bjjsd.auth_info')).user_id === '5c045ff0698a673501394d61') {
         next()
       } else next('/')
     } },

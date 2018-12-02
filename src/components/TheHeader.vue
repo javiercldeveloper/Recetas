@@ -7,8 +7,8 @@
         <router-link to="/acceso">Acceso</router-link>
         <router-link to="/contacto">Contacto</router-link>
         <router-link to="/buscatureceta">Busca la receta</router-link>
-        <router-link v-if="user === '5bfba961698a673ef8c4e16d'" to="/insertarnuevosingredientes">Insertar Ingredientes</router-link>
-        <router-link v-if="user === '5bfba961698a673ef8c4e16d'" to="/insertarnuevarecetas">Insertar Recetas</router-link>
+        <router-link v-if="user === '5c045ff0698a673501394d61'" to="/insertarnuevosingredientes">Insertar Ingredientes</router-link>
+        <router-link v-if="user === '5c045ff0698a673501394d61'" to="/insertarnuevarecetas">Insertar Recetas</router-link>
       </div>
       <font-awesome-icon
         @click="desplegarMenu"

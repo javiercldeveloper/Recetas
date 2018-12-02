@@ -173,7 +173,7 @@ export default {
           descripcion: this.newRecipeDescription,
           preparacion: this.newRecipePreparation,
           tiempoPreparacion: this.newRecipeTime,
-          chefId: '5bfba961698a673ef8c4e16d',
+          chefId: '5c045ff0698a673501394d61',
           thumbnail: this.newRecipeThumbnailLink,
           image: this.newRecipeImageLink,
           numeroIngredientes: this.newRecipeIngredients.length,
