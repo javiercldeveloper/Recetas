@@ -9,7 +9,7 @@ import TheIngredientInsert from '../components/TheIngredientInsert'
 
 export default {
 
-  name: 'PageNewItems',
+  name: 'PageNewIngredients',
   components: { TheIngredientInsert }
 }
 </script>
