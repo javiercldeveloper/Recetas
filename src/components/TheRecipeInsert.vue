@@ -26,7 +26,7 @@
         <input type="text" v-model="newRecipeImageLink">
       </div>
       <div>
-        <p><strong>Añade Ingredientes a la receta</strong></p>
+        <p><strong>Añade Ingredientes a la receta (Mínimo 3)</strong></p>
       </div>
       <div>
         <select v-model="selectedIngredient">
@@ -203,12 +203,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/global.scss";
  .insertRecipe{
    width: 50%;
    @media screen and (max-width: 620px) {
        width: 80%;
    }
-   background-color: indianred;
+   background-color: $color-tertiary;
    border-radius: 5px;
    margin:auto;
    margin-bottom: 50px;

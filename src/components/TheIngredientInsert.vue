@@ -13,6 +13,7 @@
         <input type="text" name="" v-model="newIngredientName">
         <input type="button" v-if="!tried" value="Inserta ingrediente" @click="insertNewIngredient">
         <input type="button" v-if="tried" value="Volver a Insertar" @click="reset">
+        <p v-if="incomplete">Debes indicar un tipo de ingrediente y el nombre del nuevo ingrediente.</p>
         <p v-if="inserted">Insertado el ingrediente {{ newIngredientName }} del tipo {{ ingredientType }} con id {{ newId }}</p>
         <p v-if="existing">Ya existe el ingrediente {{ newIngredientName }} en la base de datos.</p>
     </div>
@@ -29,6 +30,7 @@ export default {
       newId: '',
       ingredientType: '',
       newIngredientName: '',
+      incomplete: false,
       inserted: false,
       existing: false,
       tried: false
@@ -46,21 +48,26 @@ export default {
         })
     },
     insertNewIngredient () {
-      db.collection('colec')
-        .find({ Nombre: this.newIngredientName }).asArray()
-        .then((result) => {
-          if (result.length > 0) {
-            this.existing = true
-            this.tried = true
-          } else {
-            db.collection('colec')
-              .insertOne({ Id: this.newId, Tipo: this.ingredientType, Nombre: this.newIngredientName })
-              .then(result => {
-                this.inserted = true
-                this.tried = true
-              })
-          }
-        })
+      if (this.ingredientType === '' || this.newIngredientName === '') {
+        this.incomplete = true
+      } else {
+        this.incomplete = false
+        db.collection('colec')
+          .find({ Nombre: this.newIngredientName }).asArray()
+          .then((result) => {
+            if (result.length > 0) {
+              this.existing = true
+              this.tried = true
+            } else {
+              db.collection('colec')
+                .insertOne({ Id: this.newId, Tipo: this.ingredientType, Nombre: this.newIngredientName })
+                .then(result => {
+                  this.inserted = true
+                  this.tried = true
+                })
+            }
+          })
+      }
     },
     reset () {
       this.tried = false
@@ -75,12 +82,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../styles/global.scss";
  .insertItem{
    width: 50%;
    @media screen and (max-width: 620px) {
        width: 80%;
    }
-   background-color: indianred;
+   background-color: $color-tertiary;
    border-radius: 5px;
    margin:auto;
    display: flex;

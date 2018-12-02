@@ -73,6 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/global.scss";
   .main {
       display: flex;
       flex-direction: row;
@@ -97,7 +98,7 @@ export default {
   }
   .description {
       padding:15px;
-      background-color: burlywood;
+      background-color: $color-secondary-light;
       display: flex;
       flex-direction: column;
       >* {

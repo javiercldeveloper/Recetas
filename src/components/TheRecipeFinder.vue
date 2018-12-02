@@ -6,6 +6,14 @@
    class="finderMain">
     <div class="ingredientsSelection">
       <h2>Indica los ingredientes de tu despensa</h2>
+      <div
+            class="basket"
+            :class="{ full: this.selectedIngredients.length > 0 }">
+            <font-awesome-icon
+              @click="showSelectedMobile()"
+              icon="shopping-basket" />
+            {{ this.selectedIngredients.length }}
+      </div>
       <div>
         <select v-model="ingredientType" v-on:change="checkRemainingIngredients">
             <option disabled value="">Selecciona un tipo de ingrediente</option>
@@ -38,19 +46,11 @@
           @click="addIngredientToQuery"
           :disabled="activeButton"
           >
-          <div
-            class="basket"
-            :class="{ full: this.selectedIngredients.length > 0 }">
-            <font-awesome-icon
-              @click="showSelectedMobile()"
-              icon="shopping-basket" />
-            {{ this.selectedIngredients.length }}
-          </div>
       </div>
     </div>
     <div class="selectionResult">
       <h2>Lista de ingredientes</h2>
-      <p>Debes indicar al menos 4 ingredientes para que busquemos una receta</p>
+      <p>Debes indicar al menos 3 ingredientes para que busquemos una receta</p>
       <div class="arrayChosen">
         <div class="ingredientChosen"
           v-for="selected in selectedIngredients"
@@ -66,7 +66,7 @@
       </div>
       <div class="botonInferior">
         <input
-          v-if="selectedIngredients.length > 0"
+          v-if="selectedIngredients.length > 2"
           type="button"
           @click="fetchRecipes"
           value="Busca tu receta">
@@ -202,16 +202,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/global.scss";
-
-.basket {
-  display: none;
-  margin-top: 30px;
-  opacity: 0.3;
-  &.full{
-    opacity: 1;
-  }
-}
-
 .finderMain{
   display: flex;
   flex-direction: row;
@@ -222,7 +212,7 @@ export default {
 
 .ingredientsSelection {
   border-radius: 10px;
-  background-color:cadetblue;
+  background-color:$color-secondary-light;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -241,12 +231,21 @@ export default {
   padding: 20px;
   text-align: center;
   min-height: 400px;
-  background-color: antiquewhite;
+  background-color: $color-primary-light;
   flex: 1.3;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 
+}
+
+.basket {
+  display: none;
+  margin-top: 30px;
+  opacity: 0.3;
+  &.full{
+    opacity: 1;
+  }
 }
 
  @media screen and (max-width: 620px) {
@@ -261,10 +260,6 @@ export default {
         }
     }
 
-.input{
-  background-color:beige;
-}
-
 .arrayChosen{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -274,7 +269,8 @@ export default {
   & .ingredientChosen{
     border-radius: 5px;
     border: 1px solid black;
-    background-color: #3aad4d;
+    background-color: $color-primary-dark;
+    color: white;
     padding: 3px;
     padding-left: 10px;
     cursor: pointer;

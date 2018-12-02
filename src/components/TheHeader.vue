@@ -55,21 +55,19 @@ export default {
 }
 </script>
 <style lang="scss">
-/* Temporary stylesheet for the header */
-
+@import "../styles/global.scss";
 .header {
   position: fixed;
   width: 100%;
   display: flex;
   justify-content:space-around;
   align-items: center;
-  background-color: #3aad4d;
+  background-color: $color-primary;
   padding: 15px 10px;
   min-height: 40px;
   z-index: 10000;
 }
 
-/* Style the header links */
 .header a {
   color: white;
   text-align: center;
@@ -84,20 +82,17 @@ export default {
   font-size: 25px;
   font-weight: bold;
   &.router-link-active{
-    background-color: #3aad4d;
+    background-color: $color-primary;
     color: white;
   }
 }
 
 .header a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: $color-primary-dark;
 }
 
-/* Style the active/current routerlink*/
 .header .router-link-active {
-  background-color:cornflowerblue ;
-  color: white;
+  background-color:$color-primary-light ;
 }
 
 @media screen and (max-width: 992px) {
@@ -114,7 +109,7 @@ export default {
         overflow: auto;
         display: flex;
         flex-direction: column;
-        background-color: #3aad4d;
+        background-color: $color-primary;
         border-top: 1px solid black;
         >*{
           border-bottom: 1px solid black;

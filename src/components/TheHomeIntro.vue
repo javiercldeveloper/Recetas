@@ -29,6 +29,7 @@ export default {
 </script>
 
 <style lang="scss" >
+@import "../styles/global.scss";
   .mainChef {
       p, li {
           font-size: 1.6em;
@@ -87,7 +88,7 @@ export default {
     width: 50%;
     margin:auto;
     margin-top: 25px;
-    background-color: chocolate;
+    background-color: $color-primary;
     color: white;
     text-align: center;
     padding: 10px;
@@ -95,7 +96,7 @@ export default {
     font-size: 16px;
     border-radius: 8px;
     &:hover{
-      background-color: rgb(204, 155, 121);
+      background-color: $color-primary-light;
     }
   }
 </style>

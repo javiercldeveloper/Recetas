@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Lora');
 
+$color-primary : #3aad4d;
+$color-secondary: chocolate;
+$color-tertiary: indianred;
+$color-primary-light: lighten( $color-primary, 10% );
+$color-primary-dark: darken( $color-primary, 10% );
+$color-secondary-light: lighten( $color-secondary, 10% );
+$color-secondary-dark: darken( $color-secondary, 10% );
+
+
 html, body {
   height: 100%;
   box-sizing: content-box;
@@ -37,7 +46,7 @@ img{
 }
 
 input[type=button] {
-  background-color: chocolate;
+  background-color: $color-primary;
   color: white;
   text-align: center;
   padding: 10px;
@@ -45,6 +54,6 @@ input[type=button] {
   font-size: 16px;
   border-radius: 8px;
     &:hover{
-      background-color: rgb(204, 155, 121);
+      background-color: $color-primary-light;
     }
 }

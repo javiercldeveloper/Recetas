@@ -46,16 +46,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .mainSlider{
-        text-align: center;
-        display: flex;
-        justify-items: center;
-        min-height: 200px;
-        margin-top: 50px;
-    }
-    .subslider{
-        background-color: royalblue;
-        color: white;
-        flex: 1;
-    }
+@import "../styles/global.scss";
+  .mainSlider{
+      text-align: center;
+      display: flex;
+      justify-items: center;
+      min-height: 200px;
+      margin-top: 50px;
+  }
+  .subslider{
+      background-color: $color-tertiary;
+      color: white;
+      flex: 1;
+  }
 </style>

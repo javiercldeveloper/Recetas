@@ -5,7 +5,7 @@
         <img :src="this.recipe.thumbnail === '' ? `/images/nothumbnail.jpg` : this.recipe.thumbnail">
       </a>
     </div>
-    <div class="rest">
+    <div class="text">
       <a :href="'/receta/'+ this.recipe.id.$numberInt">
       <strong>{{ this.recipe.nombre }}</strong>
       </a>
@@ -45,7 +45,7 @@ export default {
   flex-shrink: 0;
   margin:auto;
 }
-.rest{
+.text{
   margin-left: 10px;
   flex-grow: 1;
     @media screen and (max-width: 620px) {

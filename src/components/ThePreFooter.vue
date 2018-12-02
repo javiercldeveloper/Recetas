@@ -22,7 +22,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../styles/global.scss";
 .prefooter{
+  padding-top: 10px;
+  background-color: $color-primary-light;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

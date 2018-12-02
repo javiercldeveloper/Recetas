@@ -4,12 +4,12 @@
       <h2>Acceso</h2>
       <input type="text" name="email" v-model="email">
       <input type="password" name="password" v-model="password">
-      <input type="button" value="Log In" @click="log">
+      <input type="button" value="Log In" @click="logIn">
       {{message}}
     </div>
     <div v-else class="access">
       <p>Usuario con id {{user}} conectado</p>
-      <input type="button" value="Log Out" @click="fuera">
+      <input type="button" value="Log Out" @click="logOut">
       {{message}}
     </div>
   </div>
@@ -42,7 +42,7 @@ export default {
     currentUser === '5bfba961698a673ef8c4e16d' ? this.logged = true : this.logged = false
   },
   methods: {
-    log () {
+    logIn () {
       const credential = new UserPasswordCredential(this.email, this.password)
       store.client.auth.loginWithCredential(credential)
         .then(user => { location.reload() })
@@ -50,7 +50,7 @@ export default {
           this.message = error.message
         })
     },
-    fuera () {
+    logOut () {
       store.client.auth.logout()
         .then(response => {
           this.logged = false

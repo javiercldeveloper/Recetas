@@ -1,20 +1,20 @@
 <template>
     <div class="main">
-    <div class="image">
-      <a :href="'/receta/'+ this.recipe.id.$numberInt">
-        <img
-        :src="this.recipe.image === '' ? `/images/noimage.jpg` : this.recipe.image"
-        class="sliderImage">
-      </a>
-    </div>
-    <div class="rest">
-      <h2><a :href="'/receta/'+ this.recipe.id.$numberInt">
-      <strong>{{ this.recipe.nombre }}</strong>
-      </a>
-      </h2>
-      <hr>
-      <p>{{ this.recipe.descripcion }}</p>
-  </div>
+      <div class="image">
+        <a :href="'/receta/'+ this.recipe.id.$numberInt">
+          <img
+          :src="this.recipe.image === '' ? `/images/noimage.jpg` : this.recipe.image"
+          class="sliderImage">
+        </a>
+      </div>
+      <div class="text">
+        <h2><a :href="'/receta/'+ this.recipe.id.$numberInt">
+        <strong>{{ this.recipe.nombre }}</strong>
+        </a>
+        </h2>
+        <hr>
+        <p>{{ this.recipe.descripcion }}</p>
+      </div>
   </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
   padding-left: 30px;
   padding-right: 30px;
 }
-.rest{
+.text{
   align-self: center;
   padding-left: 30px;
   padding-right: 30px;
@@ -61,6 +61,9 @@ export default {
         text-align: center;
         margin-top: 10px;
       }
+  a{
+    color:white;
+  }
 }
 
 </style>

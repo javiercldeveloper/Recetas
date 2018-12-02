@@ -34,13 +34,17 @@ export default {
 </script>
 
 <style lang="scss">
-  .footer{
+@import "../styles/global.scss";
+  .footer {
   text-align: center;
   color: white;
   padding: 5px;
   display: flex;
   justify-content: space-around;
-  background-color: chocolate;
+  background-color: $color-secondary;
   min-height: 50px;
+  a {
+    color:white
+  }
   }
 </style>

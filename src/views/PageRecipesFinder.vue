@@ -1,5 +1,5 @@
 <template>
-        <the-recipe-finder></the-recipe-finder>
+        <the-recipe-finder/>
 </template>
 
 <script>

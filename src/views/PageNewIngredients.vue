@@ -1,6 +1,6 @@
 <template>
     <div>
-      <TheIngredientInsert/>
+      <the-ingredient-insert/>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TheRecipeDescription/>
+    <the-recipe-description/>
   </div>
 </template>
 

@@ -69,26 +69,6 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-    },
-    postNewIngredient (newIngredient) {
-    // axios.post('/', {
-    //   newIngredient
-    // })
-    //   .then(response => {
-    //     return response.data
-    //   })
-    //   .catch(error =>
-    //     console.log(error))
-    },
-    postNewRecipe (newRecipe) {
-    // axios.post('/', {
-    //   newRecipe
-    // })
-    //   .then(response => {
-    //     return response.data
-    //   })
-    //   .catch(error =>
-    //     console.log(error))
     }
   }
 }

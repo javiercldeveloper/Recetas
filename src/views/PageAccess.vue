@@ -13,11 +13,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@import "../styles/global.scss";
     .mainAccess{
         text-align: center;
         margin: auto;
         width: 40%;
-        background-color: #3aad4d;
+        background-color: $color-tertiary;
         padding: 30px;
         border-radius: 20px;
         @media screen and (max-width: 620px) {
