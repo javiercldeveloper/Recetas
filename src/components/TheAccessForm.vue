@@ -2,7 +2,9 @@
   <div>
     <div v-if="!logged" class="access">
       <h2>Acceso</h2>
+      <label for="email">Email</label>
       <input type="text" name="email" v-model="email">
+      <label for="password">Password</label>
       <input type="password" name="password" v-model="password">
       <input type="button" value="Log In" @click="logIn">
       {{message}}
@@ -75,5 +77,8 @@ export default {
        width: 80%;
      }
    }
+ }
+ label{
+   font-weight: bold;
  }
 </style>
