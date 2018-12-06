@@ -59,7 +59,7 @@
           <div>{{ selected.Nombre }}</div>
           <div class="removebutton">
               <font-awesome-icon
-              @click="removeIngredient(selected.Id)"
+              @click="removeIngredient(selected.Nombre)"
               icon="minus-circle" />
             </div>
         </div>
@@ -167,11 +167,11 @@ export default {
       this.checkRemainingIngredients()
     },
 
-    removeIngredient (id) {
+    removeIngredient (nombre) {
     // Method to remove an ingredient from the chosen list
-      let index = this.ingredients.findIndex(x => x.Id === id)
+      let index = this.ingredients.findIndex(x => x.Nombre === nombre)
       this.ingredients[index].Seleccionado = false
-      index = this.selectedIngredients.findIndex(x => x.Id === id)
+      index = this.selectedIngredients.findIndex(x => x.Nombre === nombre)
       this.selectedIngredients.splice(index, 1)
     },
 
