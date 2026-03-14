@@ -1,5 +1,11 @@
-import { Stitch } from 'mongodb-stitch-browser-sdk'
+import Vue from 'vue'
+import Vuex from 'vuex'
+import auth from './store/modules/auth'
 
-export const store = {
-  client: Stitch.initializeDefaultAppClient('segundo-bjjsd')
-}
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  modules: {
+    auth
+  }
+})

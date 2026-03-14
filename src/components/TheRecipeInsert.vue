@@ -51,12 +51,12 @@
       <div>
         <div class="ingredientChosen"
           v-for="selected in newRecipeIngredients"
-          :key="selected.Id"
+          :key="selected"
           >
           <div>{{ selected }}</div>
           <div class="removebutton">
               <font-awesome-icon
-              @click="removeIngredient(selected.Id)"
+              @click="removeIngredient(selected)"
               icon="minus-circle" />
             </div>
         </div>
@@ -80,9 +80,13 @@
 </template>
 
 <script>
-import { store } from '../store.js'
+import { stitchClient } from '../stitch-client'
 import { RemoteMongoClient } from 'mongodb-stitch-browser-sdk'
-const db = store.client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('db')
+import { getIngredients } from '../api/services'
+import { mapGetters } from 'vuex'
+
+const db = stitchClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('db')
+
 export default {
   name: 'TheRecipeInsert',
   data () {
@@ -90,7 +94,6 @@ export default {
       ingredients: [],
       selectedIngredient: '',
       newId: '',
-      ingredientType: '',
       newRecipeName: '',
       newRecipeDescription: '',
       newRecipePreparation: '',
@@ -98,7 +101,6 @@ export default {
       newRecipeThumbnailLink: '',
       newRecipeImageLink: '',
       newRecipeIngredients: [],
-      newRecipeIngredientsLength: '',
       incomplete: false,
       inserted: false,
       existing: false,
@@ -110,24 +112,18 @@ export default {
     this.fetchLastId()
   },
   computed: {
+    ...mapGetters('auth', ['userId']),
     activeButton () {
-      if (this.selectedIngredient === '') { return true } else return false
+      return this.selectedIngredient === ''
     },
     availableIngredients () {
-      let filteredIngredients = this.ingredients.filter((ingrediente) => {
-        return !ingrediente.Seleccionado
-      })
-      function compare (a, b) {
-        if (a.Nombre < b.Nombre) { return -1 }
-        if (a.Nombre > b.Nombre) { return 1 }
-        return 0
-      }
-      return filteredIngredients.sort(compare)
+      const filtered = this.ingredients.filter(i => !i.Seleccionado)
+      return filtered.sort((a, b) => a.Nombre.localeCompare(b.Nombre))
     }
   },
   methods: {
     fetchIngredients () {
-      this.$services.methods.getIngredients().then((result) => { this.ingredients = result })
+      getIngredients().then((result) => { this.ingredients = result })
     },
     fetchLastId () {
       db.collection('recipes').find().asArray()
@@ -136,34 +132,39 @@ export default {
         })
     },
     addIngredientToQuery () {
-      let chosenIngredient = this.ingredients.find(obj => obj.Nombre === this.selectedIngredient)
-      this.newRecipeIngredients.push(chosenIngredient.Nombre)
-      let index = this.ingredients.findIndex(x => x.Nombre === this.selectedIngredient)
-      this.ingredients[index].Seleccionado = true
+      const index = this.ingredients.findIndex(x => x.Nombre === this.selectedIngredient)
+      if (index !== -1) {
+        this.newRecipeIngredients.push(this.ingredients[index].Nombre)
+        this.ingredients[index].Seleccionado = true
+      }
       this.selectedIngredient = ''
     },
-    removeIngredient (id) {
-      let index = this.ingredients.findIndex(x => x.Id === id)
-      this.ingredients[index].Seleccionado = false
-      index = this.newRecipeIngredients.findIndex(x => x.Id === id)
-      this.newRecipeIngredients.splice(index, 1)
+    removeIngredient (nombre) {
+      const ingredientIndex = this.ingredients.findIndex(x => x.Nombre === nombre)
+      if (ingredientIndex !== -1) {
+        this.ingredients[ingredientIndex].Seleccionado = false
+      }
+      const recipeIndex = this.newRecipeIngredients.indexOf(nombre)
+      if (recipeIndex !== -1) {
+        this.newRecipeIngredients.splice(recipeIndex, 1)
+      }
     },
     tryInsertNewRecipe () {
-      if (this.newRecipeName === '' || this.newRecipeDescription === '' || this.newRecipePreparation === '' || this.newRecipeTime === '') {
+      if (!this.newRecipeName || !this.newRecipeDescription || !this.newRecipePreparation || !this.newRecipeTime) {
         this.incomplete = true
-      } else {
-        this.incomplete = false
-        db.collection('recipes')
-          .find({ nombre: this.newRecipeName }).asArray()
-          .then((result) => {
-            if (result.length > 0) {
-              this.existing = true
-              this.tried = true
-            } else {
-              this.insertNewRecipe()
-            }
-          })
+        return
       }
+      this.incomplete = false
+      db.collection('recipes')
+        .find({ nombre: this.newRecipeName }).asArray()
+        .then((result) => {
+          if (result.length > 0) {
+            this.existing = true
+            this.tried = true
+          } else {
+            this.insertNewRecipe()
+          }
+        })
     },
     insertNewRecipe () {
       db.collection('recipes')
@@ -173,13 +174,13 @@ export default {
           descripcion: this.newRecipeDescription,
           preparacion: this.newRecipePreparation,
           tiempoPreparacion: this.newRecipeTime,
-          chefId: '5c045ff0698a673501394d61',
+          chefId: this.userId,
           thumbnail: this.newRecipeThumbnailLink,
           image: this.newRecipeImageLink,
           numeroIngredientes: this.newRecipeIngredients.length,
           ingredientes: this.newRecipeIngredients
         })
-        .then(result => {
+        .then(() => {
           this.inserted = true
           this.tried = true
         })

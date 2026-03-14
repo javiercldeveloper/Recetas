@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "/styles/global.scss";
+@import "./styles/global.scss";
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;

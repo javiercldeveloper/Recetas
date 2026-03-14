@@ -20,9 +20,11 @@
 </template>
 
 <script>
-import { store } from '../store.js'
+import { stitchClient } from '../stitch-client'
 import { RemoteMongoClient } from 'mongodb-stitch-browser-sdk'
-const db = store.client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('db')
+
+const db = stitchClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db('db')
+
 export default {
   name: 'TheIngredientInsert',
   data () {
@@ -43,7 +45,6 @@ export default {
     fetchLastId () {
       db.collection('colec').find().asArray()
         .then(result => {
-          console.log(result.length)
           this.newId = result.length + 1
         })
     },
@@ -61,7 +62,7 @@ export default {
             } else {
               db.collection('colec')
                 .insertOne({ Id: this.newId, Tipo: this.ingredientType, Nombre: this.newIngredientName })
-                .then(result => {
+                .then(() => {
                   this.inserted = true
                   this.tried = true
                 })

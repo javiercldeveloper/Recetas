@@ -1,74 +1,30 @@
-// Mock Data
-// const ingredients = require('./mockdata/ingredients')
-// const recipes = require('./mockdata/recipeList')
-
-import Vue from 'vue'
 import axios from 'axios'
 
-// Mixin to access the methods globally
+const BASE_URL = process.env.VUE_APP_WEBHOOK_BASE_URL
 
-Vue.mixin({
-  beforeCreate () {
-    const options = this.$options
-    if (options.services) {
-      this.$services = options.services
-    } else if (options.parent && options.parent.$services) {
-      this.$services = options.parent.$services
-    }
-  }
-})
+export function getIngredients () {
+  return axios.get(`${BASE_URL}/ingredientes`).then(response => {
+    return response.data.map(ingredient => ({
+      ...ingredient,
+      Seleccionado: false
+    }))
+  })
+}
 
-export default {
-  name: 'services',
-  methods: {
-    getIngredients () {
-      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/ingredientes')
-        .then(response => {
-          let ingredientsExtra = response.data.map((ingrediente) => {
-            ingrediente.Seleccionado = false
-            return ingrediente
-          })
-          return ingredientsExtra
-        })
-        .catch(error =>
-          console.log(error))
-    },
-    getMatchingRecipes (ingredients) {
-      return axios.post('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/Recetas', {
-        ingredients
-      })
-        .then(response => {
-          return response.data
-        })
-        .catch(error =>
-          console.log(error))
-    },
-    getRecipe (id) {
-      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/Receta?id=' + id)
-        .then(function (response) {
-          return response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    },
-    getRandomAssociate () {
-      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/randomassociate')
-        .then(function (response) {
-          return response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    },
-    getRandomRecipes () {
-      return axios.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/segundo-bjjsd/service/jj/incoming_webhook/sliderRandomRecipes')
-        .then(function (response) {
-          return response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    }
-  }
+export function getMatchingRecipes (ingredients) {
+  return axios
+    .post(`${BASE_URL}/Recetas`, { ingredients })
+    .then(response => response.data)
+}
+
+export function getRecipe (id) {
+  return axios.get(`${BASE_URL}/Receta?id=${id}`).then(response => response.data)
+}
+
+export function getRandomAssociate () {
+  return axios.get(`${BASE_URL}/randomassociate`).then(response => response.data)
+}
+
+export function getRandomRecipes () {
+  return axios.get(`${BASE_URL}/sliderRandomRecipes`).then(response => response.data)
 }

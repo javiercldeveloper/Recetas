@@ -98,6 +98,8 @@
 
 <script>
 import RecipeList from './RecipeList'
+import { getIngredients, getMatchingRecipes, getRandomAssociate } from '../api/services'
+
 export default {
   name: 'TheRecipeFinder',
   components: { RecipeList },
@@ -116,16 +118,14 @@ export default {
     }
   },
   created () {
-    // On created we fill the list of ingredients
     this.fetchIngredients()
   },
   computed: {
     activeButton () {
-      // Button disabled if no ingredient has been chosen
       if (this.selectedIngredient === '') { return true } else return false
     },
     ingredientsByType () {
-      let filteredIngredients = this.ingredients.filter((ingrediente) => {
+      const filteredIngredients = this.ingredients.filter((ingrediente) => {
         return ingrediente.Tipo.includes(this.ingredientType) && !ingrediente.Seleccionado
       })
       function compare (a, b) {
@@ -142,12 +142,10 @@ export default {
     },
 
     fetchIngredients () {
-    // Method to get the whole list of ingredientes
-      this.$services.methods.getIngredients().then((result) => { this.ingredients = result })
+      getIngredients().then((result) => { this.ingredients = result })
     },
 
     checkRemainingIngredients () {
-      // Method to check for remaining ingredients an enable the ingredient selector
       if (this.ingredientsByType.length > 0) {
         this.remainingIngredients = true
         this.defaultSelectIngredientText = 'Selecciona un ingrediente'
@@ -158,29 +156,32 @@ export default {
     },
 
     addIngredientToQuery () {
-    // Method to add the chosen ingredient to query array and rerender the ingredient selector
-      let chosenIngredient = this.ingredients.find(obj => obj.Nombre === this.selectedIngredient)
+      const chosenIngredient = this.ingredients.find(obj => obj.Nombre === this.selectedIngredient)
       this.selectedIngredients.push(chosenIngredient)
-      let index = this.ingredients.findIndex(x => x.Nombre === this.selectedIngredient)
-      this.ingredients[index].Seleccionado = true
+      const index = this.ingredients.findIndex(x => x.Nombre === this.selectedIngredient)
+      if (index !== -1) {
+        this.ingredients[index].Seleccionado = true
+      }
       this.selectedIngredient = ''
       this.checkRemainingIngredients()
     },
 
     removeIngredient (nombre) {
-    // Method to remove an ingredient from the chosen list
       let index = this.ingredients.findIndex(x => x.Nombre === nombre)
-      this.ingredients[index].Seleccionado = false
+      if (index !== -1) {
+        this.ingredients[index].Seleccionado = false
+      }
       index = this.selectedIngredients.findIndex(x => x.Nombre === nombre)
-      this.selectedIngredients.splice(index, 1)
+      if (index !== -1) {
+        this.selectedIngredients.splice(index, 1)
+      }
     },
 
     fetchRecipes () {
-    // Method to fetch the list of required recipes
       document.getElementsByClassName('title')[0].scrollIntoView()
       this.state = 'loading'
       this.title = 'Estamos buscando tus recetas'
-      this.$services.methods.getMatchingRecipes(this.selectedIngredients).then((result) => {
+      getMatchingRecipes(this.selectedIngredients).then((result) => {
         if (result.length > 0) {
           this.recipesResult = result
           this.title = 'Este es el listado de recetas'
@@ -190,8 +191,9 @@ export default {
         }
       })
     },
+
     showRandomAssociate () {
-      this.$services.methods.getRandomAssociate().then((result) => { this.associate = result })
+      getRandomAssociate().then((result) => { this.associate = result })
       this.title = 'No se han encontrado recetas con dichos ingredientes'
       this.state = 'noResult'
     }

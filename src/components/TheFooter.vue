@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     getCurrentYear () {
-      let currenTime = new Date()
+      const currenTime = new Date()
       this.year = currenTime.getFullYear()
     }
   }

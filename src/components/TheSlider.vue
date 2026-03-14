@@ -4,10 +4,9 @@
         <h1>Sugerencias para cocinar</h1>
         <transition name="slide-fade" mode="out-in">
         <slider-item
-        v-for="(recipe,index) in recipes"
-        :key="index"
-        :recipe="recipe"
-        v-if="index === currentRecipeIndex"/>
+        v-if="currentRecipe"
+        :key="currentRecipeIndex"
+        :recipe="currentRecipe"/>
         </transition>
         </div>
     </div>
@@ -20,11 +19,9 @@ export default {
   components: { SliderItem },
   data () {
     return {
-      currentRecipeIndex: 0
+      currentRecipeIndex: 0,
+      slideInterval: null
     }
-  },
-  created () {
-    this.aa()
   },
   props: {
     recipes: {
@@ -32,13 +29,23 @@ export default {
       default: null
     }
   },
+  computed: {
+    currentRecipe () {
+      if (!this.recipes || this.recipes.length === 0) return null
+      return this.recipes[this.currentRecipeIndex]
+    }
+  },
+  created () {
+    this.startAutoSlide()
+  },
+  beforeDestroy () {
+    clearInterval(this.slideInterval)
+  },
   methods: {
-    aa () {
-      setTimeout(() => {
-        if (this.currentRecipeIndex === 2) {
-          this.currentRecipeIndex = 0
-        } else { this.currentRecipeIndex++ }
-        this.aa()
+    startAutoSlide () {
+      this.slideInterval = setInterval(() => {
+        if (!this.recipes || this.recipes.length === 0) return
+        this.currentRecipeIndex = (this.currentRecipeIndex + 1) % this.recipes.length
       }, 5000)
     }
   }
